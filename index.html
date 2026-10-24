@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>隱形牙套配戴日期</title>
   <meta property="og:title" content="隱形牙套配戴日期">
-  <meta property="og:description" content="Aligner Change Schedule">
+  <meta property="og:description" content="Aligner Schedule">
   <meta property="og:type" content="website">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -360,85 +360,149 @@
       .interval-btns-row { display: flex; gap: 8px; }
       .interval-btn { flex: 1; }
     }
-  .custom-interval-box {
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.ci-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.ci-label {
-  font-size: 12px;
-  color: var(--muted);
-  white-space: nowrap;
-}
-.ci-input {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 12px;
-  color: var(--ink);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: 3px;
-  padding: 3px 7px;
-  width: 90px;
-  outline: none;
-}
-.ci-input.ci-short { width: 52px; text-align: center; }
-.ci-input[readonly] { background: #ede8de; color: var(--muted); }
-.ci-btn {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 12px;
-  background: var(--crimson);
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 14px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: opacity 0.2s;
-}
-.ci-btn:hover { opacity: 0.85; }
-.ci-result-card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 4px;
-}
-.ci-result-header {
-  background: linear-gradient(90deg, #e8e0d4, #ede8de);
-  padding: 6px 12px;
-  font-size: 11px;
-  color: var(--crimson);
-  font-weight: 700;
-  border-bottom: 1px solid var(--line);
-}
-.ci-result-row {
-  display: flex;
-  align-items: center;
-  padding: 5px 12px;
-  gap: 8px;
-  border-bottom: 1px solid rgba(214,205,184,0.35);
-  font-size: 13px;
-  font-family: 'Noto Serif TC', serif;
-  font-weight: 700;
-  color: var(--ink);
-}
-.ci-result-row:last-child { border-bottom: none; }
-.ci-result-row:hover { background: var(--paper); }
-.ci-idx {
-  font-size: 11px;
-  color: var(--muted);
-  min-width: 18px;
-}
-.ci-arrow { color: var(--line); font-size: 11px; }
+
+    /* ── Custom Interval Block ── */
+    .custom-block {
+      width: 100%;
+      max-width: 760px;
+      margin-top: 20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 14px 16px 16px;
+      box-shadow: 0 4px 20px var(--shadow);
+      position: relative;
+    }
+    .custom-block::before {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: 4px; bottom: 4px;
+      border: 1px solid var(--gold-light);
+      border-radius: 2px;
+      pointer-events: none;
+    }
+    .custom-block-label {
+      font-family: 'Playfair Display', serif;
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gold-light);
+      margin-bottom: 12px;
+    }
+    .ci-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .ci-label {
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .ci-input {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 13px;
+      color: var(--ink);
+      background: #f5f0e8;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 4px 8px;
+      width: 110px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .ci-input:focus { border-color: var(--crimson); }
+    .ci-input.ci-short { width: 56px; text-align: center; }
+    .ci-input[readonly] {
+      background: #ede8de;
+      color: var(--muted);
+      cursor: default;
+    }
+    .ci-btn {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 13px;
+      background: var(--crimson);
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 5px 16px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .ci-btn:hover { opacity: 0.85; }
+
+    /* Grid result */
+    .ci-result-wrap { margin-top: 14px; }
+    .ci-result-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .ci-result-title {
+      font-size: 12px;
+      color: var(--crimson);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .ci-pager {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .ci-page-btn {
+      background: none;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      width: 24px; height: 24px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .ci-page-btn:hover:not(:disabled) { border-color: var(--crimson); color: var(--crimson); }
+    .ci-page-btn:disabled { opacity: 0.3; cursor: default; }
+    .ci-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 6px;
+    }
+    .ci-cell {
+      background: #f5f0e8;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 6px 4px;
+      text-align: center;
+      font-family: 'Noto Serif TC', serif;
+    }
+    .ci-cell-idx {
+      font-size: 9px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .ci-cell-date {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+    .ci-cell-arrow {
+      font-size: 9px;
+      color: var(--line);
+      margin: 1px 0;
+    }
+
+    @media (max-width: 600px) {
+      .ci-grid { grid-template-columns: repeat(5, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -477,21 +541,6 @@
     </div>
     <div class="days-grid" id="daysGrid"></div>
     <div class="selected-strip">已選日期：<strong id="selectedText"></strong></div>
-    <div class="custom-interval-box">
-  <div class="ci-row">
-    <span class="ci-label">起始日</span>
-    <input class="ci-input" id="ciStart" type="text" readonly>
-  </div>
-  <div class="ci-row">
-    <span class="ci-label">每</span>
-    <input class="ci-input ci-short" id="ciDays" type="number" min="1" placeholder="天數">
-    <span class="ci-label">天更換，共</span>
-    <input class="ci-input ci-short" id="ciSets" type="number" min="1" placeholder="套數">
-    <span class="ci-label">套</span>
-  </div>
-  <button class="ci-btn" onclick="renderCustom()">產生區間</button>
-  <div id="ciResult"></div>
-</div>
   </div>
 
   <!-- Right: Buttons + Result -->
@@ -516,6 +565,22 @@
     </div>
   </div>
 
+</div>
+
+<!-- Custom Interval Block -->
+<div class="custom-block">
+  <div class="custom-block-label">客製化區間</div>
+  <div class="ci-row">
+    <span class="ci-label">起始日</span>
+    <input class="ci-input" id="ciStart" type="text" readonly>
+    <span class="ci-label">每</span>
+    <input class="ci-input ci-short" id="ciDays" type="number" min="1" placeholder="天數">
+    <span class="ci-label">天更換，共</span>
+    <input class="ci-input ci-short" id="ciSets" type="number" min="1" placeholder="套數">
+    <span class="ci-label">套</span>
+    <button class="ci-btn" onclick="renderCustom()">產生區間</button>
+  </div>
+  <div id="ciResultWrap"></div>
 </div>
 
 <script>
@@ -662,34 +727,63 @@
 
   window.addEventListener('resize', matchHeight);
   renderCalendar();
-function renderCustom() {
-  const days = parseInt(document.getElementById('ciDays').value);
-  const sets = parseInt(document.getElementById('ciSets').value);
-  const area = document.getElementById('ciResult');
 
-  if (!days || !sets || days < 1 || sets < 1) {
-    area.innerHTML = '<div style="font-size:11px;color:var(--muted);padding:6px 0;">請填寫天數與套數</div>';
-    return;
+  // ── Custom interval ──
+  const PER_PAGE = 50;
+  let ciData = [];
+  let ciPage = 0;
+
+  function renderCustom() {
+    const days = parseInt(document.getElementById('ciDays').value);
+    const sets = parseInt(document.getElementById('ciSets').value);
+    const wrap = document.getElementById('ciResultWrap');
+
+    if (!days || !sets || days < 1 || sets < 1) {
+      wrap.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:8px 0;">請填寫天數與套數</div>';
+      return;
+    }
+
+    ciData = [];
+    let cursor = new Date(selectedDate);
+    for (let i = 0; i < sets; i++) {
+      const start = new Date(cursor);
+      const end = addDays(cursor, days - 1);
+      ciData.push({ idx: i + 1, start, end });
+      cursor = addDays(cursor, days);
+    }
+    ciPage = 0;
+    renderCiPage(days, sets);
   }
 
-  let cursor = new Date(selectedDate);
-  let html = `<div class="ci-result-card">
-    <div class="ci-result-header">每 ${days} 天更換，共 ${sets} 套</div>`;
+  function renderCiPage(days, sets) {
+    const wrap = document.getElementById('ciResultWrap');
+    const totalPages = Math.ceil(ciData.length / PER_PAGE);
+    const pageData = ciData.slice(ciPage * PER_PAGE, (ciPage + 1) * PER_PAGE);
 
-  for (let i = 0; i < sets; i++) {
-    const start = new Date(cursor);
-    const end = addDays(cursor, days - 1);
-    html += `<div class="ci-result-row">
-      <span class="ci-idx">${i+1}</span>
-      <span>${fmtShort(start)}</span>
-      <span class="ci-arrow">→</span>
-      <span>${fmtShort(end)}</span>
-    </div>`;
-    cursor = addDays(cursor, days);
+    let cells = pageData.map(r => `
+      <div class="ci-cell">
+        <div class="ci-cell-idx">${r.idx}</div>
+        <div class="ci-cell-date">${fmtShort(r.start)}</div>
+        <div class="ci-cell-arrow">↓</div>
+        <div class="ci-cell-date">${fmtShort(r.end)}</div>
+      </div>`).join('');
+
+    wrap.innerHTML = `
+      <div class="ci-result-wrap">
+        <div class="ci-result-header">
+          <span class="ci-result-title">每 ${days} 天更換，共 ${sets} 套</span>
+          <div class="ci-pager">
+            <button class="ci-page-btn" onclick="ciPrev(${days},${sets})" ${ciPage === 0 ? 'disabled' : ''}>&#8249;</button>
+            <span>${ciPage + 1} / ${totalPages}</span>
+            <button class="ci-page-btn" onclick="ciNext(${days},${sets})" ${ciPage >= totalPages - 1 ? 'disabled' : ''}>&#8250;</button>
+          </div>
+        </div>
+        <div class="ci-grid">${cells}</div>
+      </div>`;
   }
-  html += '</div>';
-  area.innerHTML = html;
-}
+
+  function ciPrev(days, sets) { if (ciPage > 0) { ciPage--; renderCiPage(days, sets); } }
+  function ciNext(days, sets) { const tp = Math.ceil(ciData.length / PER_PAGE); if (ciPage < tp - 1) { ciPage++; renderCiPage(days, sets); } }
 </script>
 </body>
 </html>
