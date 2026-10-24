@@ -415,18 +415,49 @@
       transition: border-color 0.2s;
     }
     .ci-input:focus { border-color: var(--crimson); }
+    .ci-short-wrap {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      overflow: hidden;
+      background: #f5f0e8;
+      transition: border-color 0.2s;
+    }
+    .ci-short-wrap:focus-within { border-color: var(--crimson); }
     .ci-input.ci-short {
-      width: 64px;
+      width: 44px;
       text-align: center;
-      padding-right: 4px;
+      padding: 4px 4px;
+      border: none;
+      background: transparent;
       -moz-appearance: textfield;
     }
     .ci-input.ci-short::-webkit-inner-spin-button,
-    .ci-input.ci-short::-webkit-outer-spin-button {
-      opacity: 0;
-      width: 0;
-      margin: 0;
+    .ci-input.ci-short::-webkit-outer-spin-button { display: none; }
+    .ci-input.ci-short:focus { outline: none; }
+    .ci-spin-btns {
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--line);
     }
+    .ci-spin-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 20px;
+      height: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: var(--muted);
+      padding: 0;
+      line-height: 1;
+      transition: background 0.12s, color 0.12s;
+    }
+    .ci-spin-btn:hover { background: var(--line); color: var(--ink); }
+    .ci-spin-btn:first-child { border-bottom: 1px solid var(--line); }
     .ci-input[readonly] {
       background: #ede8de;
       color: var(--muted);
@@ -585,9 +616,21 @@
     <span class="ci-label">起始日</span>
     <input class="ci-input" id="ciStart" type="text" readonly>
     <span class="ci-label">每</span>
-    <input class="ci-input ci-short" id="ciDays" type="number" min="1" placeholder="天數">
+    <div class="ci-short-wrap">
+      <input class="ci-input ci-short" id="ciDays" type="number" min="1" placeholder="天">
+      <div class="ci-spin-btns">
+        <button class="ci-spin-btn" onclick="spinVal('ciDays',1)">▲</button>
+        <button class="ci-spin-btn" onclick="spinVal('ciDays',-1)">▼</button>
+      </div>
+    </div>
     <span class="ci-label">天更換，共</span>
-    <input class="ci-input ci-short" id="ciSets" type="number" min="1" placeholder="套數">
+    <div class="ci-short-wrap">
+      <input class="ci-input ci-short" id="ciSets" type="number" min="1" placeholder="套">
+      <div class="ci-spin-btns">
+        <button class="ci-spin-btn" onclick="spinVal('ciSets',1)">▲</button>
+        <button class="ci-spin-btn" onclick="spinVal('ciSets',-1)">▼</button>
+      </div>
+    </div>
     <span class="ci-label">套</span>
     <button class="ci-btn" onclick="renderCustom()">產生區間</button>
   </div>
@@ -738,6 +781,19 @@
 
   window.addEventListener('resize', matchHeight);
   renderCalendar();
+
+  // ── Enter key on custom inputs ──
+  ['ciDays','ciSets','ciStart'].forEach(id => {
+    document.getElementById(id).addEventListener('keydown', e => {
+      if (e.key === 'Enter') renderCustom();
+    });
+  });
+
+  function spinVal(id, delta) {
+    const el = document.getElementById(id);
+    const val = parseInt(el.value) || 0;
+    el.value = Math.max(1, val + delta);
+  }
 
   // ── Custom interval ──
   const PER_PAGE = 50;
