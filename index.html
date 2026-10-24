@@ -409,13 +409,24 @@
       background: #f5f0e8;
       border: 1px solid var(--line);
       border-radius: 3px;
-      padding: 4px 8px;
-      width: 110px;
+      padding: 4px 10px;
+      width: 136px;
       outline: none;
       transition: border-color 0.2s;
     }
     .ci-input:focus { border-color: var(--crimson); }
-    .ci-input.ci-short { width: 56px; text-align: center; }
+    .ci-input.ci-short {
+      width: 64px;
+      text-align: center;
+      padding-right: 4px;
+      -moz-appearance: textfield;
+    }
+    .ci-input.ci-short::-webkit-inner-spin-button,
+    .ci-input.ci-short::-webkit-outer-spin-button {
+      opacity: 0;
+      width: 0;
+      margin: 0;
+    }
     .ci-input[readonly] {
       background: #ede8de;
       color: var(--muted);
